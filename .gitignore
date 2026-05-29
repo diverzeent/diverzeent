@@ -1,0 +1,5 @@
+# Local tooling / build artifacts (not part of the article deliverables)
+node_modules/
+package-lock.json
+*.png
+shot.mjs
