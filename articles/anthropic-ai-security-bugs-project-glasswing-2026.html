@@ -125,10 +125,20 @@
 .btn-red{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;text-decoration:none;font-weight:800;padding:14px 22px;border-radius:11px;width:100%;justify-content:center}
 .tri{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid #fff}
 
+/* Related / Keep Reading */
+.related-cluster{margin:36px 0 4px;border-top:2px solid var(--line);padding-top:24px}
+.rc-label{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--ink);margin-bottom:14px}
+.rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rc-card{display:flex;flex-direction:column;gap:8px;border:1px solid var(--line);border-radius:12px;padding:16px;text-decoration:none !important;background:#fff;transition:border-color .15s,transform .15s}
+.rc-card:hover{border-color:var(--red);transform:translateY(-2px)}
+.rc-kicker{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--red)}
+.rc-title{font-size:15px;font-weight:700;line-height:1.35;color:var(--ink)}
+
 @media(max-width:760px){
   .stats-inner{grid-template-columns:repeat(2,1fr)}
   .aff-grid{grid-template-columns:1fr}
   .cs-inner{grid-template-columns:1fr}
+  .rc-grid{grid-template-columns:1fr}
 }
 </style>
 
@@ -196,7 +206,7 @@
             <span class="byline-sep">|</span>
             <time datetime="2026-05-29" itemprop="datePublished">May 29, 2026</time>
             <span class="byline-sep">|</span>
-            <a href="https://www.diverzeent.com/category/ai-tech/">AI &amp; Tech</a>
+            <span>AI &amp; Tech</span>
           </div>
 
           <p class="article-intro" itemprop="description">
@@ -216,7 +226,7 @@
 
             <h3 class="art-h3 gold-head">The Cloudflare Number That Should Stop You Cold</h3>
             <p>Of that 10,000-plus total, roughly <strong>2,000 vulnerabilities were found in Cloudflare</strong> — a single company that sits in front of a huge share of the world's websites. Cloudflare is the invisible layer that protects and speeds up millions of sites, which means flaws there do not stay contained to one product. They ripple outward to everyone who depends on it, which, whether you realize it or not, includes you.</p>
-            <p>That concentration is the real headline. It is a reminder that the internet runs on a surprisingly small number of foundational platforms, and that a tool capable of finding 2,000 issues in one of them is a tool with enormous consequences depending on whose hands it is in.</p>
+            <p>That concentration is the real headline. It is a reminder that the internet runs on a surprisingly small number of foundational platforms, and that a tool capable of finding 2,000 issues in one of them is a tool with enormous consequences depending on whose hands it is in. Cloudflare has been in the news all year for AI-related reasons — it was among the companies cited when <a href="https://www.diverzeent.com/snap-layoffs-2026-ai-replacing-jobs/">Snap fired 1,000 workers and blamed AI</a> for the new workforce math sweeping the industry.</p>
 
             <div class="dze-news-callout">
               <div class="callout-label">Di-VErZe Analysis</div>
@@ -225,7 +235,7 @@
 
             <h3 class="art-h3">AI as Both Weapon and Shield</h3>
             <p>For years, "AI in cybersecurity" mostly meant smarter spam filters and anomaly alerts. Project Glasswing is a different animal. It demonstrates that AI is now capable of doing the offensive research — the part that finds the holes — at a speed and scale no human team can match. That is fantastic news if the technology is used to patch software before it ships, and genuinely alarming if it is used to find those same holes for exploitation.</p>
-            <p>The honest takeaway is that both futures are now possible at the same time. The defenders have a powerful new ally, and so do the attackers. The advantage goes to whoever moves with more urgency, which is exactly why this story matters beyond the security industry.</p>
+            <p>The honest takeaway is that both futures are now possible at the same time. The defenders have a powerful new ally, and so do the attackers. The advantage goes to whoever moves with more urgency, which is exactly why this story matters beyond the security industry. It is the same competitive pressure driving the broader model race, where cheaper, faster systems like <a href="https://www.diverzeent.com/deepseek-r1-is-shaking-up-silicon-valley/">DeepSeek R1 are shaking up the entire AI industry</a> and putting frontier-level capability within reach of far more players.</p>
 
             <h3 class="art-h3">Enterprise Gets the Keys: Self-Hosted Claude Sandboxes</h3>
             <p>The same week Glasswing made headlines, Anthropic also announced <strong>self-hosted Claude agent sandboxes</strong> for enterprise, unveiled in public beta at the Code with Claude event in London on May 26. In plain terms, large organizations can now run Claude's tool execution on their own infrastructure instead of sending everything to an outside server.</p>
@@ -237,7 +247,7 @@
 
             <h3 class="art-h3 gold-head">The Atlanta Angle: What ATL's Tech Sector Should Do Now</h3>
             <p>Atlanta has quietly become one of the country's most important cybersecurity hubs — home to a dense cluster of security firms, Georgia Tech's research pipeline, and a fast-growing roster of startups and fintech operations across Midtown and Buckhead. For Atlanta's tech community, the message from Project Glasswing is simple: AI-driven security testing is no longer optional or futuristic. It is the new baseline.</p>
-            <p>Local startups, agencies, and creators building digital products should assume their competitors and their attackers both have access to this class of tooling. The businesses that fold AI vulnerability detection into how they build — rather than treating security as something to bolt on later — are the ones that will earn trust in 2026. At <strong>Di-VErZe E.N.T</strong>, we cover this shift specifically with Atlanta's builders and creators in mind through our <a href="https://www.diverzeent.com/category/ai-tech/">AI &amp; Tech coverage</a>.</p>
+            <p>Local startups, agencies, and creators building digital products should assume their competitors and their attackers both have access to this class of tooling. The businesses that fold AI vulnerability detection into how they build — rather than treating security as something to bolt on later — are the ones that will earn trust in 2026. At <strong>Di-VErZe E.N.T</strong>, we cover this shift with Atlanta's builders and creators in mind — including <a href="https://www.diverzeent.com/ai-adoption-2026-ibm-ceo-study-generative-ai-workforce/">how AI adoption has officially passed half the world and rewritten job descriptions</a>.</p>
 
             <h3 class="art-h3 green-head">How to Protect Yourself Right Now — The Playbook</h3>
             <p>You cannot patch Cloudflare, but you can lock down your own corner of the internet today. Here is the no-nonsense checklist worth running this week:</p>
@@ -272,7 +282,7 @@
 
             <h3 class="art-h3">Di-VErZe Take: This Is About Positioning, Not Panic</h3>
             <p>At Di-VErZe E.N.T, we live at the intersection of technology, culture, and entertainment right here in Atlanta, and we have been tracking the AI shift in real time. The takeaway from Project Glasswing is not fear. It is urgency. AI that can find 10,000 critical bugs in a month is going to be used by someone — the only question is whether you are positioned to benefit from it or exposed by it.</p>
-            <p>The creators, business owners, and brands we work with every day are not going away because of AI. But the infrastructure around them is changing fast, and the ones who treat security and AI literacy as core skills will outlast the ones who wait. Follow our <a href="https://www.diverzeent.com/category/ai-tech/">AI &amp; Tech coverage</a> for what comes next, stream <a href="https://www.diverzeent.com/di-verze-hitz-radio/">Di-VErZe HitZ Radio</a> while you work, and if your brand or event needs Atlanta videography services, content, or a media team that understands this moment, <a href="https://www.diverzeent.com/contacts/">contact Di-VErZe E.N.T directly</a> or explore our <a href="https://www.diverzeent.com/media-packages-atlanta/">Atlanta media packages</a>.</p>
+            <p>The creators, business owners, and brands we work with every day are not going away because of AI. But the infrastructure around them is changing fast, and the ones who treat security and AI literacy as core skills will outlast the ones who wait. Stream <a href="https://www.diverzeent.com/di-verze-hitz-radio/">Di-VErZe HitZ Radio</a> while you work, and if your brand or event needs <a href="https://www.diverzeent.com/atlanta-videography-services/">Atlanta videography services</a> or a media team that understands this moment, <a href="https://www.diverzeent.com/contacts/">contact Di-VErZe E.N.T directly</a> or explore our <a href="https://www.diverzeent.com/media-packages-atlanta/">Atlanta media packages</a>.</p>
 
             <h3 class="art-h3">Frequently Asked Questions</h3>
             <div>
@@ -302,6 +312,24 @@
               </div>
             </div>
 
+          </div>
+
+          <div class="related-cluster">
+            <div class="rc-label">Keep Reading — More AI &amp; Tech From Di-VErZe E.N.T</div>
+            <div class="rc-grid">
+              <a class="rc-card" href="https://www.diverzeent.com/snap-layoffs-2026-ai-replacing-jobs/">
+                <span class="rc-kicker">AI &amp; Jobs</span>
+                <span class="rc-title">Snap Fired 1,000 People and Said "AI Did It" — The Tech Layoff Wave Isn't Slowing Down</span>
+              </a>
+              <a class="rc-card" href="https://www.diverzeent.com/ai-adoption-2026-ibm-ceo-study-generative-ai-workforce/">
+                <span class="rc-kicker">AI Adoption</span>
+                <span class="rc-title">AI Has Officially Taken Over: Half the World Is Using It — and Your Job Just Changed</span>
+              </a>
+              <a class="rc-card" href="https://www.diverzeent.com/deepseek-r1-is-shaking-up-silicon-valley/">
+                <span class="rc-kicker">AI Models</span>
+                <span class="rc-title">DeepSeek R1 Is Shaking Up the AI Industry — and Big Tech Is Scrambling</span>
+              </a>
+            </div>
           </div>
         </article>
       </main>
@@ -361,7 +389,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.diverzeent.com/"},
-        {"@type": "ListItem", "position": 2, "name": "AI & Tech", "item": "https://www.diverzeent.com/category/ai-tech/"},
+        {"@type": "ListItem", "position": 2, "name": "AI & Tech", "item": "https://www.diverzeent.com/"},
         {"@type": "ListItem", "position": 3, "name": "Anthropic AI Security 2026: Claude Found 10,000 Critical Bugs in a Single Month", "item": "https://www.diverzeent.com/anthropic-ai-security-bugs-project-glasswing-2026/"}
       ]
     },
