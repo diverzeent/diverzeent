@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ROUGE by FAY — Red Edition AI Stylist for Her</title>
+<title>ROUGE — Red Edition AI Stylist for Her</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
@@ -94,7 +94,7 @@
   <div class="wrap">
     <div class="brand">
       <!-- ROUGE logomark: lipstick-bullet "R" in a circle, gold accent -->
-      <svg class="mark" width="54" height="54" viewBox="0 0 100 100" role="img" aria-label="ROUGE by FAY logo">
+      <svg class="mark" width="54" height="54" viewBox="0 0 100 100" role="img" aria-label="ROUGE logo">
         <defs>
           <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stop-color="#ff5d73"/>
@@ -116,7 +116,7 @@
               font-size="22" fill="#fff" opacity=".92">R</text>
       </svg>
       <div class="wordwrap">
-        <div class="logo">ROUGE <b>by FAY</b></div>
+        <div class="logo">ROUGE<b>.</b></div>
         <div class="tag">Red Edition · AI Stylist for Her</div>
       </div>
     </div>
@@ -165,17 +165,17 @@
 </div>
 
 <footer class="wrap">
-  ROUGE by FAY — demo build. Swap in affiliate API keys (config.js) to go fully live across Amazon, ShopStyle, Rakuten &amp; more.
+  ROUGE — demo build. Swap in affiliate API keys (config.js) to go fully live across Amazon, ShopStyle, Rakuten &amp; more.
 </footer>
 
 <!-- ============ CONFIG (edit to go live) ============ -->
 <script>
-window.FAY_CONFIG = {
+window.ROUGE_CONFIG = {
   // "demo" = built-in catalog (works offline). Add "shopstyle","amazon","rakuten" once keys + proxy are set.
   ACTIVE_PROVIDERS: ["demo"],
   // Server-side proxy endpoint that holds your affiliate secrets (see /api/search.example.js).
   PROXY_URL: "",            // e.g. "https://yoursite.com/api/search"
-  AFFILIATE_TAG: "fay-20",  // your affiliate/sub id, appended to demo links for illustration
+  AFFILIATE_TAG: "rouge-20",  // your affiliate/sub id, appended to demo links for illustration
 };
 </script>
 
@@ -184,7 +184,7 @@ window.FAY_CONFIG = {
 /* Each product: {id, slot, name, brand, store, price, color, styles[], emoji, url}
    slot ∈ top|bottoms|dress|outerwear|shoes|bag|jewelry|sunglasses|swim
    color is a simple name mapped to a hue for harmony scoring. */
-window.FAY_CATALOG = [
+window.ROUGE_CATALOG = [
   // tops
   {slot:"top",name:"KI$$ ME Polka Off-Shoulder Tee",brand:"Trend",store:"Amazon",price:24,color:"pink",styles:["y2k","going-out","flirty"],emoji:"👚"},
   {slot:"top",name:"VICE Neon Crop Tank",brand:"Trend",store:"ShopStyle",price:28,color:"green",styles:["y2k","festival","going-out"],emoji:"🎽"},
@@ -270,7 +270,7 @@ window.FAY_CATALOG = [
 <!-- ============ ENGINE ============ -->
 <script>
 (function(){
-  const C = window.FAY_CONFIG, CAT = window.FAY_CATALOG;
+  const C = window.ROUGE_CONFIG, CAT = window.ROUGE_CATALOG;
   const $ = s=>document.querySelector(s);
 
   // ---- slot definitions ----
@@ -482,7 +482,7 @@ window.FAY_CATALOG = [
           <button class="btn btn-ghost" id="copyAll" style="color:#fff;background:transparent;border-color:#5a3a4c">Copy all links</button>
           <button class="btn btn-ghost" id="rebuild" style="color:#fff;background:transparent;border-color:#5a3a4c">Regenerate</button>
         </div>
-        <div class="disclosure">As an affiliate, ROUGE by FAY may earn a commission on purchases made through these links, at no extra cost to you.</div>
+        <div class="disclosure">As an affiliate, ROUGE may earn a commission on purchases made through these links, at no extra cost to you.</div>
       </div>`;
     // wire swaps
     out.querySelectorAll(".swap").forEach(b=>b.onclick=()=>swap(b.dataset.slot));

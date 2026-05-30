@@ -1,4 +1,4 @@
-# FAY Creative Trends — AI Stylist · RED Edition (for her)
+# ROUGE — AI Stylist · Red Edition (for her)
 
 An AI outfit builder + one-cart shopping aggregator, themed around **red** and
 styled for women. The customer sets a **budget**, describes a **vibe**, and the
@@ -25,7 +25,7 @@ your own like *"Pink Y2K kiss-me going-out fit with heels and a mini bag."*
 - Budget assembly: swaps items cheaper, then **drops optional pieces**
   (sunglasses → jewelry → bag → jacket) to stay under budget; tells the
   customer if the budget is simply too low
-- Flat-lay grid (FAY style) + line items, prices, stores, **Buy** buttons
+- Flat-lay grid (ROUGE style) + line items, prices, stores, **Buy** buttons
 - Per-item **Swap**, **Open all**, **Copy all links**, **Regenerate**
 - Affiliate disclosure shown
 
@@ -39,7 +39,7 @@ aggregators use **affiliate product APIs**. To switch from demo to live:
    - **Rakuten / Sovrn / Skimlinks** (thousands of stores, one key)
 2. Deploy `api/search.example.js` as a serverless function (rename to
    `search.js`); put your secret keys in env vars there.
-3. In `index.html` → `window.FAY_CONFIG`, set:
+3. In `index.html` → `window.ROUGE_CONFIG`, set:
    ```js
    ACTIVE_PROVIDERS: ["shopstyle","amazon"],
    PROXY_URL: "https://yoursite.com/api/search",

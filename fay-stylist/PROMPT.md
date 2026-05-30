@@ -1,4 +1,4 @@
-# FAY Creative Trends — AI Outfit Builder & One-Cart Shopping Aggregator
+# ROUGE — AI Outfit Builder & One-Cart Shopping Aggregator
 
 ## The product, in one sentence
 A web app where a customer sets a **budget**, describes the **vibe/occasion**, and the
@@ -8,7 +8,7 @@ color- and style-matched, **always under budget** — with **direct buy links** 
 can purchase everything from one screen.
 
 ## The build/system prompt (use this to drive generation)
-> Build a responsive web app called **FAY Creative Trends Stylist**.
+> Build a responsive web app called **ROUGE**.
 >
 > **Input:** a budget (USD), a free-text outfit description (e.g. "pink Y2K
 > kiss-me going-out fit with heels and a mini bag"), and optional toggles for
@@ -28,7 +28,7 @@ can purchase everything from one screen.
 > 4. Return the assembled outfit as a flat-lay grid plus a line-item list with
 >    prices and **affiliate buy links**, and a running total vs. budget.
 >
-> **Output / UX:** a flat-lay "moodboard" of the chosen pieces (FAY style),
+> **Output / UX:** a flat-lay "moodboard" of the chosen pieces (ROUGE style),
 > a checklist with thumbnails, prices, store names, and "Buy" buttons, a total,
 > a "regenerate / swap this item" control per slot, and a "Copy all links /
 > Open all" action so the customer can check out everywhere fast.

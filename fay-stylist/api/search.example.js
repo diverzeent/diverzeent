@@ -1,9 +1,9 @@
-// FAY Stylist — serverless product-search proxy (Vercel/Netlify/Cloudflare style).
+// ROUGE — serverless product-search proxy (Vercel/Netlify/Cloudflare style).
 //
 // WHY: affiliate APIs require SECRET keys and don't allow browser CORS. This
 // function holds the secrets server-side, calls one or more affiliate product
 // APIs, normalizes their results into the shape the front-end expects, and
-// returns them. Rename to search.js and deploy; set FAY_CONFIG.PROXY_URL to it.
+// returns them. Rename to search.js and deploy; set ROUGE_CONFIG.PROXY_URL to it.
 //
 // Front-end calls: POST { slot, intent:{colors,styles,brands}, providers:[...] }
 // Must return:     { items: [ {slot,name,brand,store,price,color,styles[],emoji,url}, ... ] }
