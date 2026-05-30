@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FAY Creative Trends — AI Stylist</title>
+<title>ROUGE by FAY — Red Edition AI Stylist for Her</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
     /* RED edition — styled for her */
@@ -21,11 +24,13 @@
 
   header{background:linear-gradient(125deg,#2a0309,#5e0512 55%,#a00018);color:#fff;padding:22px 0 26px;
          box-shadow:inset 0 -3px 0 var(--gold)}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand .logo{font-weight:900;letter-spacing:.5px;font-size:26px}
-  .brand .logo b{color:var(--rose)}
-  .brand .tag{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#f1c9cf}
-  .sub{color:#fbe2e5;margin:8px 0 0;font-size:15px;max-width:640px}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand .mark{flex:0 0 auto}
+  .brand .wordwrap{display:flex;flex-direction:column;line-height:1}
+  .brand .logo{font-weight:900;letter-spacing:1px;font-size:30px;font-family:"Playfair Display",Georgia,serif}
+  .brand .logo b{color:var(--rose);font-style:italic}
+  .brand .tag{font-size:10.5px;text-transform:uppercase;letter-spacing:4px;color:#f1c9cf;margin-top:6px}
+  .sub{color:#fbe2e5;margin:14px 0 0;font-size:15px;max-width:640px}
 
   /* form */
   .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;
@@ -88,8 +93,32 @@
 <header>
   <div class="wrap">
     <div class="brand">
-      <div class="logo">FAY <b>Creative</b> Trends</div>
-      <div class="tag">Red Edition · AI Stylist for Her</div>
+      <!-- ROUGE logomark: lipstick-bullet "R" in a circle, gold accent -->
+      <svg class="mark" width="54" height="54" viewBox="0 0 100 100" role="img" aria-label="ROUGE by FAY logo">
+        <defs>
+          <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ff5d73"/>
+            <stop offset="1" stop-color="#a00018"/>
+          </linearGradient>
+          <linearGradient id="gld" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f4dd99"/>
+            <stop offset="1" stop-color="#c9a24b"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="47" fill="none" stroke="url(#gld)" stroke-width="2.5"/>
+        <!-- lipstick bullet -->
+        <rect x="40" y="30" width="20" height="30" rx="3" fill="url(#rg)"/>
+        <path d="M40 30 L50 18 L60 30 Z" fill="#ff5d73"/>
+        <rect x="37" y="60" width="26" height="9" rx="2" fill="url(#gld)"/>
+        <rect x="40" y="69" width="20" height="13" rx="2" fill="#7a0a18"/>
+        <!-- subtle R cut into the bullet -->
+        <text x="50" y="53" text-anchor="middle" font-family="Georgia,serif" font-weight="700"
+              font-size="22" fill="#fff" opacity=".92">R</text>
+      </svg>
+      <div class="wordwrap">
+        <div class="logo">ROUGE <b>by FAY</b></div>
+        <div class="tag">Red Edition · AI Stylist for Her</div>
+      </div>
     </div>
     <p class="sub">Built around the perfect red. Set your budget, describe the vibe — we pull real pieces
     from across stores, match them shade-to-style, keep it under budget, and hand you one-tap buy links for the whole look.</p>
@@ -136,7 +165,7 @@
 </div>
 
 <footer class="wrap">
-  FAY Creative Trends Stylist — demo build. Swap in affiliate API keys (config.js) to go fully live across Amazon, ShopStyle, Rakuten &amp; more.
+  ROUGE by FAY — demo build. Swap in affiliate API keys (config.js) to go fully live across Amazon, ShopStyle, Rakuten &amp; more.
 </footer>
 
 <!-- ============ CONFIG (edit to go live) ============ -->
@@ -453,7 +482,7 @@ window.FAY_CATALOG = [
           <button class="btn btn-ghost" id="copyAll" style="color:#fff;background:transparent;border-color:#5a3a4c">Copy all links</button>
           <button class="btn btn-ghost" id="rebuild" style="color:#fff;background:transparent;border-color:#5a3a4c">Regenerate</button>
         </div>
-        <div class="disclosure">As an affiliate, FAY Creative Trends may earn a commission on purchases made through these links, at no extra cost to you.</div>
+        <div class="disclosure">As an affiliate, ROUGE by FAY may earn a commission on purchases made through these links, at no extra cost to you.</div>
       </div>`;
     // wire swaps
     out.querySelectorAll(".swap").forEach(b=>b.onclick=()=>swap(b.dataset.slot));
