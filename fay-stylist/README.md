@@ -1,9 +1,18 @@
-# FAY Creative Trends — AI Stylist (template)
+# FAY Creative Trends — AI Stylist · RED Edition (for her)
 
-An AI outfit builder + one-cart shopping aggregator. The customer sets a
-**budget**, describes a **vibe**, and the app assembles a complete head-to-toe
-outfit from real store items — color/style matched, **always within budget** —
-with **buy links** for every piece.
+An AI outfit builder + one-cart shopping aggregator, themed around **red** and
+styled for women. The customer sets a **budget**, describes a **vibe**, and the
+app assembles a complete head-to-toe outfit from real store items — color/style
+matched, **always within budget** — with **buy links** for every piece.
+
+**Red Edition specifics**
+- Deep red / wine / rose palette with gold accents.
+- Catalog seeded with women's red-forward pieces across every slot
+  (tops, skirts/pants, dresses, heels/boots, bags, jewelry, swim, outerwear).
+- If the shopper names no color, the engine **defaults to red** so looks stay
+  on-brand. Naming another color (e.g. "black + red") still works.
+- To re-theme to another color later: change the `--pink`/`--rose`/`--wine`
+  CSS vars, the example chips, and the implicit color in `parse()`.
 
 ## Run it now
 Open `index.html` in any browser (double-click, or drag onto a Chrome tab).

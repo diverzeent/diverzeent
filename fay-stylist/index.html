@@ -6,8 +6,12 @@
 <title>FAY Creative Trends — AI Stylist</title>
 <style>
   :root{
-    --pink:#ff2d8e;--pink-soft:#ffd6e8;--ink:#15131a;--muted:#6b6675;
-    --bg:#faf7fb;--card:#fff;--line:#ece7f0;--gold:#d4af37;--ok:#1f9e57;--bad:#e8192c;
+    /* RED edition — styled for her */
+    --pink:#d10f2e;            /* primary red (kept var name so JS/CSS hooks still resolve) */
+    --pink-soft:#ffdfe3;       /* soft rose */
+    --ink:#1a0a0d;--muted:#7c6a6d;
+    --bg:#fdf6f6;--card:#fff;--line:#f0e2e4;--gold:#c9a24b;--ok:#1f9e57;--bad:#a00018;
+    --rose:#ff5d73;--wine:#5e0512;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -15,12 +19,13 @@
   a{color:inherit}
   .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
 
-  header{background:linear-gradient(120deg,#1a0b14,#2a0f22);color:#fff;padding:22px 0 26px}
+  header{background:linear-gradient(125deg,#2a0309,#5e0512 55%,#a00018);color:#fff;padding:22px 0 26px;
+         box-shadow:inset 0 -3px 0 var(--gold)}
   .brand{display:flex;align-items:center;gap:12px}
   .brand .logo{font-weight:900;letter-spacing:.5px;font-size:26px}
-  .brand .logo b{color:var(--pink)}
-  .brand .tag{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#d9c7d2}
-  .sub{color:#e9d9e3;margin:8px 0 0;font-size:15px;max-width:640px}
+  .brand .logo b{color:var(--rose)}
+  .brand .tag{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#f1c9cf}
+  .sub{color:#fbe2e5;margin:8px 0 0;font-size:15px;max-width:640px}
 
   /* form */
   .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;
@@ -67,7 +72,7 @@
   .buy{flex:1;text-align:center;background:var(--ink);color:#fff;border-radius:10px;padding:10px;font-weight:800;font-size:13px;text-decoration:none}
   .swap{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer;font-size:13px}
 
-  .checkout{margin-top:22px;background:linear-gradient(120deg,#1a0b14,#2a0f22);color:#fff;border-radius:18px;padding:20px}
+  .checkout{margin-top:22px;background:linear-gradient(120deg,#2a0309,#5e0512 60%,#a00018);color:#fff;border-radius:18px;padding:20px;box-shadow:inset 0 2px 0 rgba(201,162,75,.5)}
   .checkout h3{margin:0 0 6px}
   .checkout p{margin:0 0 14px;color:#e0cdd9;font-size:14px}
   .cobtns{display:flex;gap:12px;flex-wrap:wrap}
@@ -84,10 +89,10 @@
   <div class="wrap">
     <div class="brand">
       <div class="logo">FAY <b>Creative</b> Trends</div>
-      <div class="tag">AI Stylist</div>
+      <div class="tag">Red Edition · AI Stylist for Her</div>
     </div>
-    <p class="sub">Set a budget, describe your vibe — we pull real items from across stores,
-    match them color-to-style, keep it under budget, and give you one-tap buy links for the whole fit.</p>
+    <p class="sub">Built around the perfect red. Set your budget, describe the vibe — we pull real pieces
+    from across stores, match them shade-to-style, keep it under budget, and hand you one-tap buy links for the whole look.</p>
     <div class="mode" id="modeline"></div>
   </div>
 </header>
@@ -97,14 +102,14 @@
     <div class="row">
       <div>
         <label>Describe your outfit / vibe</label>
-        <textarea id="desc" placeholder="e.g. pink Y2K kiss-me going-out fit with heels, mini bag and sunglasses"></textarea>
+        <textarea id="desc" placeholder="e.g. red hot date-night look — red heels, red bag, gold jewelry"></textarea>
         <div class="examples" id="examples"></div>
       </div>
       <div>
         <label>Budget</label>
         <div class="budget-line">
-          <input type="range" id="budget" min="50" max="2000" step="10" value="300">
-          <div class="budget-val" id="budgetVal">$300</div>
+          <input type="range" id="budget" min="50" max="2000" step="10" value="350">
+          <div class="budget-val" id="budgetVal">$350</div>
         </div>
         <label style="margin-top:14px">Occasion</label>
         <select id="occasion">
@@ -199,6 +204,37 @@ window.FAY_CATALOG = [
   // swim
   {slot:"swim",name:"Two-Piece Tie Bikini",brand:"Trend",store:"Fashion Nova",price:32,color:"pink",styles:["beach","festival"],emoji:"👙"},
   {slot:"swim",name:"Animal-Print Cut-Out One-Piece",brand:"Trend",store:"Revolve",price:54,color:"brown",styles:["beach","glam"],emoji:"👙"},
+
+  // ---- RED EDITION: women's red-forward pieces ----
+  {slot:"top",name:"Red Off-Shoulder Bodysuit",brand:"Trend",store:"Fashion Nova",price:32,color:"red",styles:["going-out","glam","flirty"],emoji:"👚"},
+  {slot:"top",name:"Red Satin Cowl Cami",brand:"Trend",store:"Revolve",price:38,color:"red",styles:["going-out","glam","business"],emoji:"👚"},
+  {slot:"top",name:"Red Ribbed Crop Top",brand:"Trend",store:"ShopStyle",price:24,color:"red",styles:["y2k","everyday","flirty"],emoji:"🎽"},
+  {slot:"top",name:"Red Lace Corset Top",brand:"Trend",store:"ASOS",price:46,color:"red",styles:["going-out","glam","flirty"],emoji:"👚"},
+  {slot:"bottoms",name:"Red Mini Skirt",brand:"Trend",store:"Fashion Nova",price:30,color:"red",styles:["going-out","glam","flirty"],emoji:"👗"},
+  {slot:"bottoms",name:"Red Faux-Leather Pants",brand:"Trend",store:"Revolve",price:58,color:"red",styles:["going-out","streetwear","glam"],emoji:"👖"},
+  {slot:"bottoms",name:"Red High-Waist Flare Jeans",brand:"Trend",store:"ASOS",price:54,color:"red",styles:["y2k","everyday","going-out"],emoji:"👖"},
+  {slot:"bottoms",name:"Red Biker Shorts Set",brand:"Trend",store:"ShopStyle",price:28,color:"red",styles:["athleisure","everyday"],emoji:"🩳"},
+  {slot:"dress",name:"Red Bodycon Mini Dress",brand:"Trend",store:"Fashion Nova",price:48,color:"red",styles:["going-out","glam","flirty"],emoji:"👗"},
+  {slot:"dress",name:"Red Satin Slip Maxi Dress",brand:"Trend",store:"Revolve",price:78,color:"red",styles:["glam","going-out","business"],emoji:"👗"},
+  {slot:"dress",name:"Red Halter Cut-Out Gown",brand:"Trend",store:"ASOS",price:96,color:"red",styles:["glam","going-out"],emoji:"👗"},
+  {slot:"outerwear",name:"Red Cropped Blazer",brand:"Trend",store:"Mango",price:72,color:"red",styles:["business","glam","everyday"],emoji:"🧥"},
+  {slot:"outerwear",name:"Red Faux-Fur Coat",brand:"Trend",store:"ASOS",price:140,color:"red",styles:["going-out","glam"],emoji:"🧥"},
+  {slot:"shoes",name:"Red Pointed Stiletto Pumps",brand:"Trend",store:"Steve Madden",price:75,color:"red",styles:["going-out","glam","business"],emoji:"👠"},
+  {slot:"shoes",name:"Red Strappy Platform Heels",brand:"Trend",store:"Fashion Nova",price:62,color:"red",styles:["going-out","glam","flirty"],emoji:"👠"},
+  {slot:"shoes",name:"Red Knee-High Boots",brand:"Trend",store:"Steve Madden",price:98,color:"red",styles:["going-out","streetwear","glam"],emoji:"🥾"},
+  {slot:"shoes",name:"Red Bottom Heels (designer)",brand:"Christian Louboutin",store:"Farfetch",price:895,color:"red",styles:["designer","glam","going-out"],emoji:"👠"},
+  {slot:"shoes",name:"Red Slide Sandals",brand:"Trend",store:"ShopStyle",price:34,color:"red",styles:["beach","everyday","casual"],emoji:"👡"},
+  {slot:"bag",name:"Red Patent Top-Handle Bag",brand:"Trend",store:"Mango",price:65,color:"red",styles:["business","going-out","glam"],emoji:"👜"},
+  {slot:"bag",name:"Red Quilted Chain Shoulder Bag",brand:"Trend",store:"ShopStyle",price:58,color:"red",styles:["going-out","glam","flirty"],emoji:"👜"},
+  {slot:"bag",name:"Red Mini Croc Clutch",brand:"Trend",store:"ASOS",price:40,color:"red",styles:["going-out","glam"],emoji:"👛"},
+  {slot:"bag",name:"Gucci Red GG Marmont (designer)",brand:"Gucci",store:"Farfetch",price:1350,color:"red",styles:["designer","glam","business"],emoji:"👜"},
+  {slot:"jewelry",name:"Gold + Red Crystal Drop Earrings",brand:"Trend",store:"Amazon",price:22,color:"gold",styles:["glam","going-out","flirty"],emoji:"💎"},
+  {slot:"jewelry",name:"Ruby-Red Tennis Necklace",brand:"Trend",store:"Etsy",price:34,color:"red",styles:["glam","going-out"],emoji:"📿"},
+  {slot:"jewelry",name:"Red Heart Pendant Necklace",brand:"Trend",store:"Amazon",price:20,color:"red",styles:["flirty","going-out","y2k"],emoji:"📿"},
+  {slot:"sunglasses",name:"Red-Frame Cat-Eye Sunglasses",brand:"Trend",store:"ShopStyle",price:24,color:"red",styles:["glam","going-out","y2k"],emoji:"🕶️"},
+  {slot:"sunglasses",name:"Red-Tint Shield Sunglasses",brand:"Trend",store:"Amazon",price:18,color:"red",styles:["streetwear","going-out","y2k"],emoji:"🕶️"},
+  {slot:"swim",name:"Red Two-Piece Bikini",brand:"Trend",store:"Fashion Nova",price:34,color:"red",styles:["beach","festival","flirty"],emoji:"👙"},
+  {slot:"swim",name:"Red Cut-Out One-Piece",brand:"Trend",store:"Revolve",price:52,color:"red",styles:["beach","glam"],emoji:"👙"},
 ];
 </script>
 
@@ -239,7 +275,9 @@ window.FAY_CATALOG = [
       "Business / Smart":"business","Festival":"festival"};
     if(occMap[occasion]) styles.push(occMap[occasion]);
     const brands = BRANDS.filter(b=>t.includes(b));
-    return {colors:[...new Set(colors)], styles:[...new Set(styles)], brands};
+    // Red Edition: if no color is named, lean red so the look stays on-brand.
+    const finalColors = colors.length ? colors : ["red"];
+    return {colors:[...new Set(finalColors)], styles:[...new Set(styles)], brands};
   }
 
   // ---- color harmony score between an item color and the requested palette ----
@@ -468,12 +506,12 @@ window.FAY_CATALOG = [
     const bv=$("#budgetVal"); $("#budget").oninput=e=>bv.textContent="$"+e.target.value;
     // examples
     const EX=[
-      "Pink Y2K kiss-me going-out fit with heels and a mini bag",
-      "Black + red streetwear with True Religion jacket and Jordans",
-      "Neon green festival two-piece with pink wedges",
-      "Brown glam date-night look with gold heels",
-      "All-black athleisure yoga set with Nike",
-      "Designer glam — Gucci bag, Balenciaga shades, gold jewelry",
+      "Red hot date-night look with red heels, red bag and gold jewelry",
+      "Red + black streetwear with True Religion jacket and red boots",
+      "All-red going-out glam — red dress, red bag, gold accessories",
+      "Red Y2K flirty fit with red mini bag and platform heels",
+      "Red athleisure set with Nike and a red crossbody",
+      "Red + gold designer glam — red top-handle bag, statement jewelry",
     ];
     $("#examples").innerHTML=EX.map(e=>`<button class="ex">${e}</button>`).join("");
     document.querySelectorAll(".ex").forEach(b=>b.onclick=()=>{$("#desc").value=b.textContent;run();});
@@ -481,6 +519,8 @@ window.FAY_CATALOG = [
       $("#desc").value=EX[Math.floor(Math.random()*EX.length)];run();};
     $("#modeline").textContent = C.PROXY_URL ? "Live mode · "+C.ACTIVE_PROVIDERS.join(", ")
       : "Demo mode · built-in catalog (add affiliate API keys in config to go live)";
+    // Red Edition: prefill a red look so the first screen is on-theme
+    $("#desc").value = "Red hot date-night look with red heels, red bag and gold jewelry";
   }
   init();
 })();
