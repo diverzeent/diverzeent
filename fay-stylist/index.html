@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAY Creative Trends — AI Stylist</title>
+<style>
+  :root{
+    --pink:#ff2d8e;--pink-soft:#ffd6e8;--ink:#15131a;--muted:#6b6675;
+    --bg:#faf7fb;--card:#fff;--line:#ece7f0;--gold:#d4af37;--ok:#1f9e57;--bad:#e8192c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.5}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+
+  header{background:linear-gradient(120deg,#1a0b14,#2a0f22);color:#fff;padding:22px 0 26px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .logo{font-weight:900;letter-spacing:.5px;font-size:26px}
+  .brand .logo b{color:var(--pink)}
+  .brand .tag{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#d9c7d2}
+  .sub{color:#e9d9e3;margin:8px 0 0;font-size:15px;max-width:640px}
+
+  /* form */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;
+         box-shadow:0 18px 50px rgba(30,10,25,.08);padding:20px;margin-top:-18px;position:relative}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:6px}
+  textarea,input,select{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;font-family:inherit;background:#fff}
+  textarea{min-height:84px;resize:vertical}
+  .budget-line{display:flex;align-items:center;gap:14px}
+  .budget-line input[type=range]{flex:1}
+  .budget-val{font-weight:900;font-size:22px;color:var(--pink);min-width:90px;text-align:right}
+  .slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .chip{border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;cursor:pointer;user-select:none;background:#fff}
+  .chip.on{background:var(--pink);border-color:var(--pink);color:#fff}
+  .actions{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:12px;padding:13px 22px;font-weight:800;font-size:15px;cursor:pointer}
+  .btn-go{background:var(--pink);color:#fff}
+  .btn-ghost{background:#fff;border:1.5px solid var(--line)}
+  .hint{font-size:12.5px;color:var(--muted)}
+  .examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .ex{font-size:12.5px;background:var(--pink-soft);color:#a01060;border-radius:999px;padding:6px 11px;cursor:pointer;border:none}
+
+  /* results */
+  .results{margin:26px 0 60px}
+  .summary{display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;
+           background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:18px}
+  .total{font-size:15px}
+  .total b{font-size:22px}
+  .within{color:var(--ok);font-weight:800}
+  .over{color:var(--bad);font-weight:800}
+  .pill{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:#f2eef6;border-radius:999px;padding:5px 10px;color:#6a5a78}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .thumb{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:54px;position:relative;background:#f6f2f8}
+  .swatch{position:absolute;left:10px;bottom:10px;width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+  .slotlbl{position:absolute;left:10px;top:10px;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:#fff;border-radius:999px;padding:4px 9px;color:#7a6a88}
+  .meta{padding:12px 13px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .nm{font-weight:700;font-size:14px;line-height:1.3}
+  .brnd{font-size:12px;color:var(--muted)}
+  .pr{font-weight:900;color:var(--pink);font-size:17px}
+  .store{font-size:11.5px;color:var(--muted)}
+  .ibtns{display:flex;gap:8px;padding:0 13px 13px}
+  .buy{flex:1;text-align:center;background:var(--ink);color:#fff;border-radius:10px;padding:10px;font-weight:800;font-size:13px;text-decoration:none}
+  .swap{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer;font-size:13px}
+
+  .checkout{margin-top:22px;background:linear-gradient(120deg,#1a0b14,#2a0f22);color:#fff;border-radius:18px;padding:20px}
+  .checkout h3{margin:0 0 6px}
+  .checkout p{margin:0 0 14px;color:#e0cdd9;font-size:14px}
+  .cobtns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-gold{background:var(--gold);color:#1a0b14}
+  .disclosure{font-size:11.5px;color:#cdbcc8;margin-top:12px}
+  .empty{padding:40px;text-align:center;color:var(--muted)}
+  footer{padding:30px 0;color:var(--muted);font-size:12.5px;text-align:center}
+  .mode{font-size:11px;color:#d9c7d2}
+  @media(max-width:680px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">FAY <b>Creative</b> Trends</div>
+      <div class="tag">AI Stylist</div>
+    </div>
+    <p class="sub">Set a budget, describe your vibe — we pull real items from across stores,
+    match them color-to-style, keep it under budget, and give you one-tap buy links for the whole fit.</p>
+    <div class="mode" id="modeline"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="panel">
+    <div class="row">
+      <div>
+        <label>Describe your outfit / vibe</label>
+        <textarea id="desc" placeholder="e.g. pink Y2K kiss-me going-out fit with heels, mini bag and sunglasses"></textarea>
+        <div class="examples" id="examples"></div>
+      </div>
+      <div>
+        <label>Budget</label>
+        <div class="budget-line">
+          <input type="range" id="budget" min="50" max="2000" step="10" value="300">
+          <div class="budget-val" id="budgetVal">$300</div>
+        </div>
+        <label style="margin-top:14px">Occasion</label>
+        <select id="occasion">
+          <option value="">Any</option>
+          <option>Going out / Night</option>
+          <option>Everyday / Casual</option>
+          <option>Workout / Athleisure</option>
+          <option>Beach / Vacation</option>
+          <option>Business / Smart</option>
+          <option>Festival</option>
+        </select>
+        <label style="margin-top:14px">Include pieces</label>
+        <div class="slots" id="slots"></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-go" id="go">Build my outfit</button>
+      <button class="btn btn-ghost" id="surprise">Surprise me</button>
+      <span class="hint">Tip: name colors and brands (e.g. "black + red, True Religion, Jordans").</span>
+    </div>
+  </div>
+
+  <div class="results" id="results"></div>
+</div>
+
+<footer class="wrap">
+  FAY Creative Trends Stylist — demo build. Swap in affiliate API keys (config.js) to go fully live across Amazon, ShopStyle, Rakuten &amp; more.
+</footer>
+
+<!-- ============ CONFIG (edit to go live) ============ -->
+<script>
+window.FAY_CONFIG = {
+  // "demo" = built-in catalog (works offline). Add "shopstyle","amazon","rakuten" once keys + proxy are set.
+  ACTIVE_PROVIDERS: ["demo"],
+  // Server-side proxy endpoint that holds your affiliate secrets (see /api/search.example.js).
+  PROXY_URL: "",            // e.g. "https://yoursite.com/api/search"
+  AFFILIATE_TAG: "fay-20",  // your affiliate/sub id, appended to demo links for illustration
+};
+</script>
+
+<!-- ============ DEMO CATALOG (stand-in for live provider results) ============ -->
+<script>
+/* Each product: {id, slot, name, brand, store, price, color, styles[], emoji, url}
+   slot ∈ top|bottoms|dress|outerwear|shoes|bag|jewelry|sunglasses|swim
+   color is a simple name mapped to a hue for harmony scoring. */
+window.FAY_CATALOG = [
+  // tops
+  {slot:"top",name:"KI$$ ME Polka Off-Shoulder Tee",brand:"Trend",store:"Amazon",price:24,color:"pink",styles:["y2k","going-out","flirty"],emoji:"👚"},
+  {slot:"top",name:"VICE Neon Crop Tank",brand:"Trend",store:"ShopStyle",price:28,color:"green",styles:["y2k","festival","going-out"],emoji:"🎽"},
+  {slot:"top",name:"White Ruched Bodysuit",brand:"Skims-style",store:"Nordstrom",price:42,color:"white",styles:["streetwear","everyday","glam"],emoji:"🩱"},
+  {slot:"top",name:"Abstract Cowl Drape Top",brand:"Trend",store:"Revolve",price:38,color:"brown",styles:["business","glam","everyday"],emoji:"👚"},
+  {slot:"top",name:"Black Seamless Long-Sleeve",brand:"Basics",store:"Amazon",price:22,color:"black",styles:["streetwear","everyday","athleisure"],emoji:"👕"},
+  {slot:"top",name:"Ribbed Workout Crop",brand:"Nike",store:"Nike",price:35,color:"black",styles:["athleisure","workout"],emoji:"🎽"},
+  // bottoms
+  {slot:"bottoms",name:"Black Capri Leggings",brand:"Basics",store:"Amazon",price:18,color:"black",styles:["y2k","everyday","going-out"],emoji:"👖"},
+  {slot:"bottoms",name:"Leopard Hibiscus Mesh Shorts",brand:"Trend",store:"ShopStyle",price:30,color:"brown",styles:["y2k","festival","going-out"],emoji:"🩳"},
+  {slot:"bottoms",name:"Washed Black Baggy Jeans",brand:"Trend",store:"Revolve",price:58,color:"black",styles:["streetwear","everyday"],emoji:"👖"},
+  {slot:"bottoms",name:"Brown Ruched Mini Skirt",brand:"Trend",store:"Nordstrom",price:34,color:"brown",styles:["going-out","glam"],emoji:"👗"},
+  {slot:"bottoms",name:"High-Waist Yoga Pants",brand:"Nike",store:"Nike",price:48,color:"black",styles:["athleisure","workout","everyday"],emoji:"🩲"},
+  // dresses / one-piece
+  {slot:"dress",name:"Black Long-Sleeve Jumpsuit",brand:"Trend",store:"Fashion Nova",price:46,color:"black",styles:["streetwear","going-out","everyday"],emoji:"🧍‍♀️"},
+  {slot:"dress",name:"Tie-Dye Corset Midi",brand:"Trend",store:"Revolve",price:62,color:"brown",styles:["glam","going-out"],emoji:"👗"},
+  // outerwear
+  {slot:"outerwear",name:"Moto Racing Leather Jacket",brand:"Trend",store:"ASOS",price:120,color:"black",styles:["streetwear","going-out","y2k"],emoji:"🧥"},
+  {slot:"outerwear",name:"True Religion Varsity Jacket",brand:"True Religion",store:"True Religion",price:230,color:"red",styles:["streetwear","going-out"],emoji:"🧥"},
+  // shoes
+  {slot:"shoes",name:"Studded Platform Heels",brand:"Trend",store:"Steve Madden",price:78,color:"pink",styles:["going-out","y2k","glam"],emoji:"👠"},
+  {slot:"shoes",name:"Pink Wedge Sandals",brand:"Trend",store:"ShopStyle",price:55,color:"pink",styles:["going-out","beach","glam"],emoji:"👡"},
+  {slot:"shoes",name:"Paisley Panda Dunk Low",brand:"Nike",store:"Nike",price:130,color:"black",styles:["streetwear","everyday"],emoji:"👟"},
+  {slot:"shoes",name:"Air Jordan 1 Mid",brand:"Jordan",store:"Nike",price:135,color:"red",styles:["streetwear","everyday"],emoji:"👟"},
+  {slot:"shoes",name:"Red Fuzzy Knee Boots",brand:"Trend",store:"Fashion Nova",price:70,color:"red",styles:["going-out","y2k","festival"],emoji:"🥾"},
+  {slot:"shoes",name:"Gold Ankle-Cuff Heels",brand:"Trend",store:"Nordstrom",price:88,color:"gold",styles:["glam","going-out","business"],emoji:"👠"},
+  {slot:"shoes",name:"Classic Tall UGG",brand:"UGG",store:"UGG",price:170,color:"brown",styles:["everyday","casual"],emoji:"🥾"},
+  // bags
+  {slot:"bag",name:"Pink Diesel-Style Mini Bag",brand:"Trend",store:"ShopStyle",price:60,color:"pink",styles:["y2k","going-out","flirty"],emoji:"👜"},
+  {slot:"bag",name:"Pink Floral Resin Clutch",brand:"Trend",store:"Revolve",price:48,color:"pink",styles:["going-out","glam","festival"],emoji:"👛"},
+  {slot:"bag",name:"Red Top-Handle Bag",brand:"Trend",store:"Mango",price:65,color:"red",styles:["business","going-out","glam"],emoji:"👜"},
+  {slot:"bag",name:"Orange Ruched Pouch",brand:"Bottega-style",store:"Nordstrom",price:90,color:"orange",styles:["glam","business","everyday"],emoji:"👜"},
+  {slot:"bag",name:"Red Buckle Crossbody",brand:"Trend",store:"Fashion Nova",price:52,color:"red",styles:["streetwear","going-out","y2k"],emoji:"👜"},
+  {slot:"bag",name:"Gucci GG Marmont (designer)",brand:"Gucci",store:"Farfetch",price:1290,color:"black",styles:["glam","business","designer"],emoji:"👜"},
+  {slot:"bag",name:"Louis Vuitton Pochette (designer)",brand:"Louis Vuitton",store:"Fashionphile",price:1450,color:"brown",styles:["glam","designer","business"],emoji:"👜"},
+  // jewelry
+  {slot:"jewelry",name:"Silver Cross Rosary Necklace",brand:"Trend",store:"Etsy",price:22,color:"silver",styles:["y2k","streetwear","going-out"],emoji:"📿"},
+  {slot:"jewelry",name:"Chunky Gold Dome Rings (set)",brand:"Trend",store:"Amazon",price:18,color:"gold",styles:["glam","business","everyday"],emoji:"💍"},
+  {slot:"jewelry",name:"CZ Cross Stud Earrings",brand:"Trend",store:"Amazon",price:20,color:"silver",styles:["streetwear","going-out","y2k"],emoji:"💎"},
+  {slot:"jewelry",name:"Bow Charm Tennis Bracelet",brand:"Trend",store:"Etsy",price:26,color:"silver",styles:["going-out","flirty","glam"],emoji:"📿"},
+  {slot:"jewelry",name:"Carved Floral Statement Earrings",brand:"Trend",store:"Revolve",price:30,color:"brown",styles:["glam","business"],emoji:"💎"},
+  // sunglasses
+  {slot:"sunglasses",name:"Black Shield Wrap Sunglasses",brand:"Trend",store:"ShopStyle",price:24,color:"black",styles:["y2k","going-out","streetwear"],emoji:"🕶️"},
+  {slot:"sunglasses",name:"BB-Logo Shield Shades",brand:"Balenciaga-style",store:"Farfetch",price:390,color:"black",styles:["designer","streetwear","glam"],emoji:"🕶️"},
+  {slot:"sunglasses",name:"Red-Tint Rectangle Frames",brand:"Trend",store:"Amazon",price:16,color:"red",styles:["streetwear","everyday","y2k"],emoji:"🕶️"},
+  // swim
+  {slot:"swim",name:"Two-Piece Tie Bikini",brand:"Trend",store:"Fashion Nova",price:32,color:"pink",styles:["beach","festival"],emoji:"👙"},
+  {slot:"swim",name:"Animal-Print Cut-Out One-Piece",brand:"Trend",store:"Revolve",price:54,color:"brown",styles:["beach","glam"],emoji:"👙"},
+];
+</script>
+
+<!-- ============ ENGINE ============ -->
+<script>
+(function(){
+  const C = window.FAY_CONFIG, CAT = window.FAY_CATALOG;
+  const $ = s=>document.querySelector(s);
+
+  // ---- slot definitions ----
+  const SLOTS = [
+    {key:"top",label:"Top"},{key:"bottoms",label:"Bottoms"},{key:"dress",label:"Dress/1-pc"},
+    {key:"outerwear",label:"Jacket"},{key:"shoes",label:"Shoes"},{key:"bag",label:"Bag"},
+    {key:"jewelry",label:"Jewelry"},{key:"sunglasses",label:"Sunglasses"},{key:"swim",label:"Swim"},
+  ];
+  const DEFAULT_ON = ["top","bottoms","shoes","bag","jewelry","sunglasses"];
+
+  // ---- color hue map for harmony ----
+  const HUE = {pink:330,red:0,orange:30,gold:45,yellow:55,green:120,blue:215,
+               brown:25,white:0,black:0,silver:0,gray:0};
+  const NEUTRAL = new Set(["white","black","silver","gray","gold","brown"]);
+
+  const STYLE_WORDS = ["y2k","streetwear","glam","athleisure","workout","business","festival",
+                       "going-out","beach","everyday","casual","flirty","designer"];
+  const BRANDS = ["gucci","louis vuitton","prada","nike","jordan","ugg","true religion","balenciaga","dunk"];
+
+  // ---- parse free text into intent ----
+  function parse(desc, occasion){
+    const t = (desc||"").toLowerCase();
+    const colors = Object.keys(HUE).filter(c=>t.includes(c));
+    let styles = STYLE_WORDS.filter(s=>t.includes(s.replace("-"," "))||t.includes(s));
+    if(/night|club|party|out\b/.test(t)) styles.push("going-out");
+    if(/gym|work ?out|yoga|run/.test(t)) styles.push("workout","athleisure");
+    if(/beach|pool|vacation|swim/.test(t)) styles.push("beach");
+    if(/kiss|cute|flirt/.test(t)) styles.push("flirty","y2k");
+    const occMap={"Going out / Night":"going-out","Everyday / Casual":"everyday",
+      "Workout / Athleisure":"athleisure","Beach / Vacation":"beach",
+      "Business / Smart":"business","Festival":"festival"};
+    if(occMap[occasion]) styles.push(occMap[occasion]);
+    const brands = BRANDS.filter(b=>t.includes(b));
+    return {colors:[...new Set(colors)], styles:[...new Set(styles)], brands};
+  }
+
+  // ---- color harmony score between an item color and the requested palette ----
+  function colorScore(itemColor, palette){
+    if(!palette.length) return 0.6;
+    if(palette.includes(itemColor)) return 1;
+    if(NEUTRAL.has(itemColor)) return 0.8;           // neutrals match anything
+    // hue closeness to nearest requested color
+    let best=0;
+    for(const p of palette){
+      if(NEUTRAL.has(p)){best=Math.max(best,0.7);continue;}
+      const d=Math.min(Math.abs(HUE[itemColor]-HUE[p]),360-Math.abs(HUE[itemColor]-HUE[p]));
+      const comp=Math.abs(d-180); // reward complementary (~180°)
+      best=Math.max(best, d<35?0.9 : comp<35?0.75 : 0.35);
+    }
+    return best;
+  }
+  function styleScore(itemStyles, want){
+    if(!want.length) return 0.6;
+    const inter=itemStyles.filter(s=>want.includes(s)).length;
+    return inter ? Math.min(1, 0.5+inter*0.25) : 0.2;
+  }
+  function brandScore(item, brands){
+    if(!brands.length) return 0;
+    return brands.some(b=>(item.brand+" "+item.name).toLowerCase().includes(b))?0.6:0;
+  }
+
+  function scoreItem(item, intent){
+    return 0.45*colorScore(item.color,intent.colors)
+         + 0.40*styleScore(item.styles,intent.styles)
+         + brandScore(item,intent.brands);
+  }
+
+  // ---- provider layer (demo here; live providers plug in identically) ----
+  async function fetchCandidates(slot, intent){
+    if(C.ACTIVE_PROVIDERS.includes("demo") || !C.PROXY_URL){
+      return CAT.filter(p=>p.slot===slot).map(p=>({
+        ...p, id:p.slot+"-"+p.name.replace(/\W+/g,"-").toLowerCase(),
+        url:p.url||demoLink(p)
+      }));
+    }
+    // LIVE: POST to your serverless proxy that calls ShopStyle/Amazon/etc.
+    const r = await fetch(C.PROXY_URL,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({slot,intent,providers:C.ACTIVE_PROVIDERS})});
+    return (await r.json()).items;
+  }
+  function demoLink(p){
+    // illustrative search link so every item is clickable in demo mode
+    const q=encodeURIComponent(p.brand+" "+p.name);
+    const tag=C.AFFILIATE_TAG?("&tag="+encodeURIComponent(C.AFFILIATE_TAG)):"";
+    return `https://www.google.com/search?q=${q}+buy${tag}`;
+  }
+
+  // ---- assemble one item per requested slot within budget ----
+  // Optional slots get dropped (in this priority order) if we still can't fit.
+  const DROP_ORDER=["sunglasses","jewelry","bag","outerwear","swim"];
+  async function build(intent, slots, budget){
+    // candidates per slot, best-scored first
+    const perSlot={};
+    for(const s of slots){
+      const cands=(await fetchCandidates(s,intent))
+        .map(c=>({...c, _score:scoreItem(c,intent)}))
+        .sort((a,b)=> b._score-a._score || a.price-b.price);
+      if(cands.length) perSlot[s]=cands;
+    }
+    let active=Object.keys(perSlot);
+    let pick={}; active.forEach(s=>pick[s]=perSlot[s][0]);
+    const sum=()=>active.reduce((n,s)=>n+(pick[s]?pick[s].price:0),0);
+    const cheapestSum=()=>active.reduce((n,s)=>n+perSlot[s][perSlot[s].length-1].price,0);
+
+    // 1) swap items down to cheaper candidates (least score loss per dollar)
+    let guard=0;
+    while(sum()>budget && guard++<300){
+      let bestSlot=null,bestLoss=Infinity,bestNext=null;
+      for(const s of active){
+        const cur=pick[s];
+        const cheaper=perSlot[s].filter(c=>c.price<cur.price).sort((a,b)=>b.price-a.price)[0];
+        if(!cheaper) continue;
+        const loss=(cur._score-cheaper._score)/Math.max(1,(cur.price-cheaper.price));
+        if(loss<bestLoss){bestLoss=loss;bestSlot=s;bestNext=cheaper;}
+      }
+      if(!bestSlot) break;
+      pick[bestSlot]=bestNext;
+    }
+
+    // 2) still over even at cheapest? drop optional slots until it fits.
+    const dropped=[];
+    for(const s of DROP_ORDER){
+      if(sum()<=budget) break;
+      if(active.includes(s)){
+        active=active.filter(x=>x!==s); delete pick[s]; dropped.push(s);
+      }
+    }
+    // after dropping, re-pick best-affordable per remaining slot
+    if(dropped.length){
+      active.forEach(s=>pick[s]=perSlot[s][0]);
+      guard=0;
+      while(sum()>budget && guard++<300){
+        let bestSlot=null,bestLoss=Infinity,bestNext=null;
+        for(const s of active){
+          const cur=pick[s];
+          const cheaper=perSlot[s].filter(c=>c.price<cur.price).sort((a,b)=>b.price-a.price)[0];
+          if(!cheaper) continue;
+          const loss=(cur._score-cheaper._score)/Math.max(1,(cur.price-cheaper.price));
+          if(loss<bestLoss){bestLoss=loss;bestSlot=s;bestNext=cheaper;}
+        }
+        if(!bestSlot) break;
+        pick[bestSlot]=bestNext;
+      }
+    }
+    return {pick, active, total:sum(), dropped};
+  }
+
+  // ---- swatch color for UI ----
+  const SW={pink:"#ff2d8e",red:"#e8192c",orange:"#ff7a1a",gold:"#d4af37",yellow:"#ffd21a",
+            green:"#9acd32",blue:"#2f7bd6",brown:"#7a4a2b",white:"#fff",black:"#15131a",
+            silver:"#c7ccd4",gray:"#9aa0ab"};
+
+  // ---- render ----
+  let LAST=null;
+  function render(res, budget){
+    LAST={res,budget};
+    const out=$("#results");
+    if(!res.active.length){out.innerHTML='<div class="empty">No pieces selected — turn some on above.</div>';return;}
+    const within=res.total<=budget;
+    if(!within){
+      const cheapest=res.active.reduce((n,s)=>n+res.pick[s].price,0);
+      out.insertAdjacentHTML('afterbegin',
+        `<div class="summary" style="border-color:#ffd0dd;background:#fff6f9">
+          <div class="total" style="color:#a01060">
+            <b>Budget too low for this look.</b> The most affordable matching pieces total
+            <b>$${cheapest}</b>. Raise the budget to about <b>$${cheapest}</b>, or remove a piece above.
+          </div>
+        </div>`);
+    }
+    const cards=res.active.map(s=>{
+      const p=res.pick[s];
+      const sw=SW[p.color]||"#ccc";
+      return `<div class="item" data-slot="${s}">
+        <div class="thumb">${p.emoji||"🛍️"}
+          <span class="slotlbl">${s}</span>
+          <span class="swatch" style="background:${sw}"></span>
+        </div>
+        <div class="meta">
+          <div class="nm">${p.name}</div>
+          <div class="brnd">${p.brand}</div>
+          <div class="pr">$${p.price}</div>
+          <div class="store">${p.store}</div>
+        </div>
+        <div class="ibtns">
+          <a class="buy" href="${p.url}" target="_blank" rel="noopener nofollow sponsored">Buy</a>
+          <button class="swap" data-slot="${s}">Swap</button>
+        </div>
+      </div>`;
+    }).join("");
+    out.innerHTML=`
+      <div class="summary">
+        <div class="total">Outfit total: <b>$${res.total}</b> &nbsp;
+          <span class="${within?'within':'over'}">${within?'✓ within':'over'} $${budget} budget</span>
+        </div>
+        <div>
+          <span class="pill">${res.active.length} pieces</span>
+          ${res.dropped&&res.dropped.length?`<span class="pill" style="background:#ffe9ef;color:#a01060">dropped to fit: ${res.dropped.join(', ')}</span>`:''}
+          <span class="pill">${C.ACTIVE_PROVIDERS.join(', ')} mode</span>
+        </div>
+      </div>
+      <div class="grid">${cards}</div>
+      <div class="checkout">
+        <h3>Shop the whole look</h3>
+        <p>Open every item in new tabs, or copy all the links to check out across stores.</p>
+        <div class="cobtns">
+          <button class="btn btn-gold" id="openAll">Open all ${res.active.length} items</button>
+          <button class="btn btn-ghost" id="copyAll" style="color:#fff;background:transparent;border-color:#5a3a4c">Copy all links</button>
+          <button class="btn btn-ghost" id="rebuild" style="color:#fff;background:transparent;border-color:#5a3a4c">Regenerate</button>
+        </div>
+        <div class="disclosure">As an affiliate, FAY Creative Trends may earn a commission on purchases made through these links, at no extra cost to you.</div>
+      </div>`;
+    // wire swaps
+    out.querySelectorAll(".swap").forEach(b=>b.onclick=()=>swap(b.dataset.slot));
+    $("#openAll").onclick=()=>res.active.forEach(s=>window.open(res.pick[s].url,"_blank"));
+    $("#copyAll").onclick=()=>{
+      const txt=res.active.map(s=>`${res.pick[s].name} — ${res.pick[s].url}`).join("\n");
+      navigator.clipboard.writeText(txt); $("#copyAll").textContent="Copied!";
+      setTimeout(()=>$("#copyAll").textContent="Copy all links",1500);
+    };
+    $("#rebuild").onclick=()=>run();
+  }
+
+  // swap one slot to the next-best candidate that keeps total within budget
+  let SWAPIDX={};
+  async function swap(slot){
+    const intent=CURRENT.intent;
+    const cands=(await fetchCandidates(slot,intent)).map(c=>({...c,_score:scoreItem(c,intent)}))
+      .sort((a,b)=>b._score-a._score||a.price-b.price);
+    SWAPIDX[slot]=((SWAPIDX[slot]??0)+1)%cands.length;
+    const cur=LAST.res; const others=cur.active.filter(s=>s!==slot)
+      .reduce((n,s)=>n+cur.pick[s].price,0);
+    // try from chosen index forward for one that fits budget
+    for(let i=0;i<cands.length;i++){
+      const c=cands[(SWAPIDX[slot]+i)%cands.length];
+      if(others+c.price<=LAST.budget){cur.pick[slot]=c;break;}
+    }
+    cur.total=cur.active.reduce((n,s)=>n+cur.pick[s].price,0);
+    render(cur,LAST.budget);
+  }
+
+  let CURRENT={intent:{colors:[],styles:[],brands:[]}};
+  async function run(){
+    const desc=$("#desc").value, occ=$("#occasion").value, budget=+$("#budget").value;
+    const slots=[...document.querySelectorAll('.chip.on')].map(c=>c.dataset.slot);
+    const intent=parse(desc,occ); CURRENT={intent};
+    SWAPIDX={};
+    $("#results").innerHTML='<div class="empty">Styling your look…</div>';
+    const res=await build(intent,slots,budget);
+    render(res,budget);
+    $("#results").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  // ---- UI init ----
+  function init(){
+    // slot chips
+    $("#slots").innerHTML=SLOTS.map(s=>
+      `<span class="chip ${DEFAULT_ON.includes(s.key)?'on':''}" data-slot="${s.key}">${s.label}</span>`).join("");
+    document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>c.classList.toggle("on"));
+    // budget label
+    const bv=$("#budgetVal"); $("#budget").oninput=e=>bv.textContent="$"+e.target.value;
+    // examples
+    const EX=[
+      "Pink Y2K kiss-me going-out fit with heels and a mini bag",
+      "Black + red streetwear with True Religion jacket and Jordans",
+      "Neon green festival two-piece with pink wedges",
+      "Brown glam date-night look with gold heels",
+      "All-black athleisure yoga set with Nike",
+      "Designer glam — Gucci bag, Balenciaga shades, gold jewelry",
+    ];
+    $("#examples").innerHTML=EX.map(e=>`<button class="ex">${e}</button>`).join("");
+    document.querySelectorAll(".ex").forEach(b=>b.onclick=()=>{$("#desc").value=b.textContent;run();});
+    $("#go").onclick=run; $("#surprise").onclick=()=>{
+      $("#desc").value=EX[Math.floor(Math.random()*EX.length)];run();};
+    $("#modeline").textContent = C.PROXY_URL ? "Live mode · "+C.ACTIVE_PROVIDERS.join(", ")
+      : "Demo mode · built-in catalog (add affiliate API keys in config to go live)";
+  }
+  init();
+})();
+</script>
+</body>
+</html>
